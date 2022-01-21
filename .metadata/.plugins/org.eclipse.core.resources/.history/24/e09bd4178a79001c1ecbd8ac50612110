@@ -1,0 +1,5 @@
+package com.aini.express.service;
+
+public interface FileService {
+
+}

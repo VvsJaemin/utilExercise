@@ -1,0 +1,5 @@
+package com.aini.express.utils;
+
+public class HtmlCharacterEscapes {
+
+}

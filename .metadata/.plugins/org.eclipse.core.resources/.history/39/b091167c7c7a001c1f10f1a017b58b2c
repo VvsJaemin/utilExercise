@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/include/jstl.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form id="uploadFrm" enctype="multipart/form-data">
+		<p>
+			데이터 업로드<br>엑셀파일만 업로드 가능(xls, xlsx)
+		</p>
+		<input type="file" name="upFile" id="upFile" accept=".xlsx, .xls" />
+	</form>
+	<script>
+		let upFile = $('#upFile')[0];
+		upFile.addEventListener('change', function() {
+			let form = $('#uploadFrm')[0];
+			let frmData = new FormData(form);
+
+			$.ajax({
+				enctype : 'multipart/form-data',
+				type : 'POST',
+				url : CONTEXTROOT + '컨트롤러 RequestMapping URL',
+				processData : false,
+				contentType : false,
+				cache : false,
+				data : frmData,
+				success : function(data) {
+					console.log(data);
+				},
+				error : function(e) {
+					console.log(e);
+					alert('파일업로드 실패');
+				}
+			});
+		});
+	</script>
+</body>
+</html>

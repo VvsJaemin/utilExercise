@@ -1,0 +1,71 @@
+package com.aini.express.configs;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.aini.express.common.filters.SessionFilter;
+import com.aini.express.common.interceptors.Interceptor;
+import com.aini.express.common.interceptors.Log4jInterceptor;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    private final Log4jInterceptor log4jInterceptor;
+    private final Interceptor expressInterceptor;
+    @Value("${spring.webservice.intro}")
+    private String introPage;
+    
+    /**
+     * 초기 페이지 매핑
+     */
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry){
+        registry.addRedirectViewController("/", introPage);
+    }
+
+    public WebConfig( Log4jInterceptor log4jInterceptor 
+                    , Interceptor expressInterceptor) {
+        this.log4jInterceptor = log4jInterceptor;
+        this.expressInterceptor = expressInterceptor;
+    }
+    
+    /**
+     * 세션 필터
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @Bean
+    public FilterRegistrationBean<SessionFilter> sessionFilter() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new SessionFilter());
+        filterRegistrationBean.addUrlPatterns("*.do");
+        return filterRegistrationBean;
+    }
+    
+    /**
+     * 커스텀 필터
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        List<String> excPathPatter = new ArrayList<String>();
+        excPathPatter.add("/css/**");
+        excPathPatter.add("/font/**");
+        excPathPatter.add("/images/**");
+        excPathPatter.add("/js/**");
+        excPathPatter.add("/favicon.ico");
+        
+        registry.addInterceptor(expressInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(log4jInterceptor).addPathPatterns("/**");
+        
+        //registry.addInterceptor(expressInterceptor).addPathPatterns("/**").excludePathPatterns(excPathPatter);
+        //registry.addInterceptor(log4jInterceptor).addPathPatterns("/**").excludePathPatterns(excPathPatter);
+    }
+    
+
+}

@@ -1,0 +1,66 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/include/jstl.jsp"%>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>파일업로드</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<h2>파일 업로드 Test</h2>
+	<form class="upload" method="post" enctype="multipart/form-data">
+		<input id="file" type="file" name="uploadFile" multiple>
+	</form>
+	<button id="uploadBtn">Upload</button>
+
+	<script>
+		$(document).ready(function() {
+		
+			
+			// 정규식으로 확장자 제한 
+			var regex = new RegExp("(.*?)\.(gif|jpeg|jpg|png|bmp|pdf|zip)$");
+			function checkExtension(fileName) {
+				if (!regex.test(fileName)) {
+					alert("이미지 및 PDF, ZIP 파일만 업로드 할 수 있습니다.");
+					return false;
+				}
+				return true;
+			}
+
+
+			$("#uploadBtn").on("click", function(e) {
+				var formData = new FormData();
+				var inputFile = $("input[name='uploadFile']");
+				var files = inputFile[0].files;
+
+				for (var i = 0; i < files.length; i++) {
+					if (!checkExtension(files[i].name)) {
+						return false;
+					}
+					formData.append("uploadFile", files[i])
+				}
+
+				$.ajax({
+					type : 'post',
+					url : '/uploadAjaxAction',
+					data : formData,
+					processData : false,
+					contentType : false,
+					success : function(data) {
+						alert("파일 업로드 성공.");
+					},
+					error : function(error) {
+						alert("파일 업로드에 실패하였습니다.");
+
+					}
+				})
+			})
+		})
+	</script>
+
+</body>
+</html>

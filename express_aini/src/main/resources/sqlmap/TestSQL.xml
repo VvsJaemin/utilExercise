@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aini.express.mapper.TestMapper">
+    
+    <select id="getData" resultType="hashMap">
+        <!-- 
+        select no
+             , exp_not_region
+             , exp_set_region
+             , exp_add_price_region
+             , set_cost
+             , set_item_cate
+             , order_list_num
+             , exp_order_list_num
+             , claim_order_list_num
+             , account_list_num
+             , exp_noship_order_list_num
+             , put_order_list_num
+             , rs_order_insert_list_num
+             , nomatch_colors
+             , order_filter_filed
+             , order_filter_key
+             , order_claim_status
+             , order_claim_last_id
+             , sms_use
+             , sms_type
+             , sms_icode_id
+             , sms_icode_pw
+             , sms_icode_server_ip
+             , sms_icode_server_port
+             , sms_default_phone
+             , xls_limit
+          from sw_sm_config
+         union all
+          -->
+        select '1' as no
+             , 'a1' as exp_not_region
+             , 'b1' as exp_set_region
+             , 'c1' as exp_add_price_region
+             , 'd1' as set_cost
+             , 'e1' as set_item_cate
+             , 'f1' as order_list_num
+             , 'g1' as exp_order_list_num
+             , 'h1' as claim_order_list_num
+             , 'i1' as account_list_num
+             , 'j1' as exp_noship_order_list_num
+             , 'k1' as put_order_list_num
+             , 'l1' as rs_order_insert_list_num
+             , 'm1' as nomatch_colors
+             , 'n1' as order_filter_filed
+             , 'o1' as order_filter_key
+             , 'p1' as order_claim_status
+             , 'q1' as order_claim_last_id
+             , 'r1' as sms_use
+             , 's1' as sms_type
+             , 't1' as sms_icode_id
+             , 'u1' as sms_icode_pw
+             , 'v1' as sms_icode_server_ip
+             , 'w1' as sms_icode_server_port
+             , 'x1' as sms_default_phone
+             , 'y1' as xls_limit
+     union all
+        select '2' as no
+             , 'a2' as exp_not_region
+             , 'b2' as exp_set_region
+             , 'c2' as exp_add_price_region
+             , 'd2' as set_cost
+             , 'e2' as set_item_cate
+             , 'f2' as order_list_num
+             , 'g2' as exp_order_list_num
+             , 'h2' as claim_order_list_num
+             , 'i2' as account_list_num
+             , 'j2' as exp_noship_order_list_num
+             , 'k2' as put_order_list_num
+             , 'l2' as rs_order_insert_list_num
+             , 'm2' as nomatch_colors
+             , 'n2' as order_filter_filed
+             , 'o2' as order_filter_key
+             , 'p2' as order_claim_status
+             , 'q2' as order_claim_last_id
+             , 'r2' as sms_use
+             , 's2' as sms_type
+             , 't2' as sms_icode_id
+             , 'u2' as sms_icode_pw
+             , 'v2' as sms_icode_server_ip
+             , 'w2' as sms_icode_server_port
+             , 'x2' as sms_default_phone
+             , 'y2' as xls_limit
+    </select>
+</mapper>

@@ -1,0 +1,5 @@
+package com.aini.express.mapper;
+
+public interface FileMapper {
+
+}

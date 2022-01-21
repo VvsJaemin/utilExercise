@@ -1,0 +1,5 @@
+package com.aini.express.dto;
+
+public class XssRequestDto {
+
+}

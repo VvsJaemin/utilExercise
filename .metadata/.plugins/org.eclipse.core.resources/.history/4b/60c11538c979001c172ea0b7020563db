@@ -1,0 +1,5 @@
+package com.aini.express.controller;
+
+public class XssRequestController {
+
+}
